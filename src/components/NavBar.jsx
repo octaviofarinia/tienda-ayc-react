@@ -15,7 +15,7 @@ const NavBar = () => {
                 <a className="btn btn-ghost normal-case text-lg">Especiales</a>
             </div>
             <div className="flex-none">
-                <CartWidget />
+                <CartWidget cantItems={1} subtotal={100} />
                 <ProfileWidget />
             </div>
         </div>
