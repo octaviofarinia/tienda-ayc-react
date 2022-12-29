@@ -1,33 +1,17 @@
-import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Image, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 
-const ProductCard = ({ image, title, description, price }) => {
+const ProductCard = ({ title, description, image }) => {
     return (
-        <Card maxW='sm'>
-            <CardBody>
-                <Image
-                    src={image}
-                    borderRadius='lg'
-                />
-                <Stack mt='6' spacing='3'>
-                    <Heading size='md'>{title}</Heading>
-                    <Text>
-                        {description}
-                    </Text>
-                    <Text color='blue.600' fontSize='2xl'>
-                        ${price}
-                    </Text>
-                </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-                <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='blue'>
-                        Agregar al carrito
-                    </Button>
-                </ButtonGroup>
-            </CardFooter>
-        </Card>
+        <div className="card w-96 bg-base-100 shadow-xl">
+            <figure><img src={image} alt={title} /></figure>
+            <div className="card-body">
+                <h2 className="card-title">{title}</h2>
+                <p>{description}</p>
+                <div className="card-actions justify-end">
+                    <button className="btn btn-primary">Agregar a Carrito</button>
+                </div>
+            </div>
+        </div>
     )
 }
 
