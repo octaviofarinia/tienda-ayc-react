@@ -11,10 +11,8 @@ const ProductCard = ({ title, image, category, price }) => {
         />
       </a>
       <div className="mt-4">
-        <h3 className="title-font mb-1 text-xs tracking-widest text-gray-500">
-          {category}
-        </h3>
-        <h2 className="title-font text-lg font-medium text-white">{title}</h2>
+        <h3 className="mb-1 text-xs tracking-widest text-gray-500">{category}</h3>
+        <h2 className="text-lg font-medium text-white">{title}</h2>
         <p className="mt-1">${price}</p>
       </div>
     </div>
