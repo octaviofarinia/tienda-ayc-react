@@ -11,7 +11,7 @@ function App() {
   return (
     <div>
       <NavBar />
-      <ItemListContainer products={products} />
+      <ItemListContainer greeting={'Bienvenido!'} products={products} />
     </div>
   );
 }
