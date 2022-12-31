@@ -1,21 +1,25 @@
-import React from 'react'
+import React from 'react';
 import ProductCard from './ProductCard';
 
 const ItemListContainer = ({ greeting, products }) => {
-    return (
-        <div className="container flex flex-col mx-auto px-4">
-            <h1 className="text-xl font-bold text-center mt-5">{greeting}</h1>
-            <div className="grid grid-cols-1 gap-8 justify-items-center md:grid-cols-2 lg:grid-cols-3 mt-5">
-                {products.map(producto =>
-                    <ProductCard
-                        key={producto.id}
-                        title={producto.title}
-                        description={producto.description}
-                        image={producto.image} />
-                )}
-            </div>
+  return (
+    <section className="body-font bg-gray-900 text-gray-400">
+      <h1>{greeting}</h1>
+      <div className="container mx-auto px-5 py-24">
+        <div className="-m-4 flex flex-wrap">
+          {products.map((producto) => (
+            <ProductCard
+              key={producto.id}
+              title={producto.title}
+              category={producto.category}
+              image={producto.image}
+              price={producto.price}
+            />
+          ))}
         </div>
-    )
-}
+      </div>
+    </section>
+  );
+};
 
-export default ItemListContainer
+export default ItemListContainer;

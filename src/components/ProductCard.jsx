@@ -1,18 +1,24 @@
-import React from 'react'
+import React from 'react';
 
-const ProductCard = ({ title, description, image }) => {
-    return (
-        <div className="card w-96 bg-base-100 shadow-xl">
-            <figure><img src={image} alt={title} /></figure>
-            <div className="card-body">
-                <h2 className="card-title">{title}</h2>
-                <p>{description}</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Agregar a Carrito</button>
-                </div>
-            </div>
-        </div>
-    )
-}
+const ProductCard = ({ title, image, category, price }) => {
+  return (
+    <div className="w-full p-4 md:w-1/2 lg:w-1/4">
+      <a className="relative block h-48 overflow-hidden rounded">
+        <img
+          alt="ecommerce"
+          className="block h-full w-full object-cover object-center"
+          src={image}
+        />
+      </a>
+      <div className="mt-4">
+        <h3 className="title-font mb-1 text-xs tracking-widest text-gray-500">
+          {category}
+        </h3>
+        <h2 className="title-font text-lg font-medium text-white">{title}</h2>
+        <p className="mt-1">${price}</p>
+      </div>
+    </div>
+  );
+};
 
-export default ProductCard
+export default ProductCard;

@@ -1,15 +1,19 @@
-import './index.css'
-import products from "../products.json"
+import './index.css';
 import NavBar from './components/NavBar';
 import ItemListContainer from './components/ItemListContainer';
+import products from '../products.json';
 
-function App() {
-    return (
-        <div>
-            <NavBar />
-            <ItemListContainer greeting={"Bienvenido!!"} products={products} />
-        </div>
-    )
+export function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
 }
 
-export default App
+function App() {
+  return (
+    <div>
+      <NavBar />
+      <ItemListContainer products={products} />
+    </div>
+  );
+}
+
+export default App;
