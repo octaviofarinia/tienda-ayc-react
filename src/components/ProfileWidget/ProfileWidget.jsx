@@ -1,7 +1,7 @@
 import React from 'react';
 import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { classNames } from '../App';
+import { classNames } from '../../App';
 
 const ProfileWidget = () => {
   return (

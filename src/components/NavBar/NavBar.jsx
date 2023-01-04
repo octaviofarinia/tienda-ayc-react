@@ -1,9 +1,9 @@
-import '../index.css';
+import '../../index.css';
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import CartWidget from './CartWidget';
-import ProfileWidget from './ProfileWidget';
-import { classNames } from '../App';
+import CartWidget from '../CartWidget/CartWidget';
+import ProfileWidget from '../ProfileWidget/ProfileWidget';
+import { classNames } from '../../App';
 
 const navigation = [
   { name: 'Inicio', href: '#', current: true },
@@ -34,12 +34,12 @@ const NavBar = () => {
                 <div className="flex shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="/logo.png"
+                    src="/logo_3_agendas.png"
                     alt="Agendas y Cuardernos"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="/logo.png"
+                    src="/logo_3_agendas.png"
                     alt="Agendas y Cuardernos"
                   />
                 </div>
