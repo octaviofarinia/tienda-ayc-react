@@ -4,7 +4,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import CartWidget from '../CartWidget/CartWidget';
 import ProfileWidget from '../ProfileWidget/ProfileWidget';
 import { classNames } from '../../App';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export const navigation = [
   { name: 'Ropa Hombre', href: '/category/Ropa Hombre', current: false },
@@ -90,21 +90,12 @@ const NavBar = () => {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
-                <Disclosure.Button key={item.name}>
-                  <NavLink
-                    to={item.href}
-                    className={({ isActive }) => {
-                      item.current = isActive;
-                      return classNames(
-                        item.current
-                          ? 'bg-gray-900 text-white'
-                          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        'block rounded-md px-3 py-2 text-base font-medium'
-                      );
-                    }}
-                    aria-current={item.current ? 'page' : undefined}>
-                    {item.name}
-                  </NavLink>
+                <Disclosure.Button
+                  key={item.name}
+                  className={classNames(
+                    'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-900 hover:text-white'
+                  )}>
+                  <Link to={item.href}>{item.name}</Link>
                 </Disclosure.Button>
               ))}
             </div>
