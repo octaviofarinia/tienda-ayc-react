@@ -11,7 +11,7 @@ const ProfileWidget = () => {
           <span className="sr-only">Abrir menu de usuario</span>
           <img
             className="h-8 w-8 rounded-full"
-            src="./default_profile.webp"
+            src="/default_profile.webp"
             alt="User profile image"
           />
         </Menu.Button>

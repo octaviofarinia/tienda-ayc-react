@@ -7,10 +7,30 @@ import { classNames } from '../../App';
 import { Link, NavLink } from 'react-router-dom';
 
 export const navigation = [
-  { name: 'Ropa Hombre', href: '/category/Ropa Hombre', current: false },
-  { name: 'Ropa Mujer', href: '/category/Ropa Mujer', current: false },
-  { name: 'Electronicos', href: '/category/Electronicos', current: false },
-  { name: 'Joyeria', href: '/category/Joyeria', current: false }
+  {
+    name: 'Ropa Hombre',
+    href: '/category/Ropa Hombre',
+    current: false,
+    greeting: 'Ropa de Hombre'
+  },
+  {
+    name: 'Ropa Mujer',
+    href: '/category/Ropa Mujer',
+    current: false,
+    greeting: 'Ropa de Mujer'
+  },
+  {
+    name: 'Electronicos',
+    href: '/category/Electronicos',
+    current: false,
+    greeting: 'Componentes Electronicos'
+  },
+  {
+    name: 'Joyeria',
+    href: '/category/Joyeria',
+    current: false,
+    greeting: 'Articulos Joyeria'
+  }
 ];
 
 const NavBar = () => {
