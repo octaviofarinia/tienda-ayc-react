@@ -2,12 +2,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProductCard = ({ title, image, category, price }) => {
+const ProductCard = ({ id, title, image, category, price }) => {
   return (
     <div className="w-full p-4 md:w-1/2 lg:w-1/4">
-      <Link
-        to={`/item/${title.replace(/\//g, '%2f')}`}
-        className="relative block h-48 overflow-hidden rounded">
+      <Link to={`/item/${id}`} className="relative block h-48 overflow-hidden rounded">
         <img
           alt="ecommerce"
           className="block h-full w-full object-cover object-center"

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 const ItemDetailContainer = ({ products }) => {
   const { itemId } = useParams();
 
-  const item = products.find((item) => item.title.trim() == itemId.trim());
+  const item = products.find((item) => item.id == itemId);
 
   const starsRating = [];
   for (let index = 0, rating = Math.floor(item.rating.rate); index < 5; index++) {
