@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
 
 const ItemListContainer = ({ greeting, products }) => {
-  const { name } = useParams();
+  const { categoryId } = useParams();
 
   return (
     <section className="bg-gray-900 text-gray-400">
@@ -11,7 +11,7 @@ const ItemListContainer = ({ greeting, products }) => {
       <div className="container mx-auto px-5 py-24">
         <div className="-m-4 flex flex-wrap">
           {products
-            .filter((product) => name == null || product.category === name)
+            .filter((product) => categoryId == null || product.category === categoryId)
             .map((producto) => (
               <ProductCard
                 key={producto.id}

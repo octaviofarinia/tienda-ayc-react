@@ -47,7 +47,6 @@ const NavBar = () => {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <NavLink
-                      key="Inicio"
                       to="/"
                       className={({ isActive }) =>
                         classNames(
@@ -89,6 +88,12 @@ const NavBar = () => {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
+              <Disclosure.Button
+                className={classNames(
+                  'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-900 hover:text-white'
+                )}>
+                <Link to="/">Inicio</Link>
+              </Disclosure.Button>
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
