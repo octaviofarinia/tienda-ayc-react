@@ -4,9 +4,37 @@ import { useParams } from 'react-router-dom';
 const ItemDetailContainer = ({ products }) => {
   const { itemId } = useParams();
 
-  let item = products.find((item) => item.title.trim() == itemId.trim());
-  console.log(item);
-  console.log(itemId);
+  const item = products.find((item) => item.title.trim() == itemId.trim());
+  const starsRating = [];
+  for (let index = 0, rating = Math.floor(item.rating.rate); index < 5; index++) {
+    if (rating > index) {
+      starsRating.push(
+        <svg
+          fill="currentColor"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          className="h-4 w-4 text-blue-400"
+          viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      );
+    } else {
+      starsRating.push(
+        <svg
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          className="h-4 w-4 text-blue-400"
+          viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      );
+    }
+  }
 
   return (
     <section className="overflow-hidden bg-gray-900 text-gray-400">
@@ -22,63 +50,14 @@ const ItemDetailContainer = ({ products }) => {
             <h1 className="mb-1 text-3xl font-medium text-white">{item.title}</h1>
             <div className="mb-4 flex">
               <span className="flex items-center">
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="h-4 w-4 text-blue-400"
-                  viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="h-4 w-4 text-blue-400"
-                  viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="h-4 w-4 text-blue-400"
-                  viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg
-                  fill="currentColor"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="h-4 w-4 text-blue-400"
-                  viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="h-4 w-4 text-blue-400"
-                  viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <span className="ml-3">4 Reviews</span>
+                {starsRating}
+                <span className="ml-3">{item.rating.count} Reviews</span>
               </span>
             </div>
             <p className="leading-relaxed">{item.description}</p>
             <div className="mt-14 mb-5 flex items-center border-b-2 border-gray-800 pb-5"></div>
             <div className="flex">
-              <span className="text-2xl font-medium text-white">$58.00</span>
+              <span className="text-2xl font-medium text-white">${item.price}</span>
               <button className="ml-auto flex rounded border-0 bg-blue-500 py-2 px-6 text-white hover:bg-blue-600 focus:outline-none">
                 Comprar
               </button>
