@@ -15,13 +15,10 @@ function App() {
   const [products, setProducts] = useState([]);
   const productsCollectionsRef = collection(db, 'products');
 
-  const getProducts = () => {
-    getDocs(productsCollectionsRef)
-      .then((querySnapshot) => {
-        const docs = querySnapshot.docs.map((doc) => doc.data());
-        setProducts(docs);
-      })
-      .catch((e) => console.err(e));
+  const getProducts = async () => {
+    const querySnapshot = await getDocs(productsCollectionsRef);
+    const docs = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    setProducts(docs);
   };
 
   useEffect(() => {
