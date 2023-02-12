@@ -1,10 +1,59 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { CartContext } from '../../App';
 
 const ItemDetailContainer = ({ products }) => {
   const { itemId } = useParams();
-
   const item = products.find((item) => item.id == itemId);
+
+  let [cart, setCart] = useContext(CartContext);
+
+  function decrement(e) {
+    const btn = e.target.parentNode.parentElement.querySelector(
+      'button[data-action="decrement"]'
+    );
+    const target = btn.nextElementSibling;
+    let value = Number(target.value);
+
+    if (value === 0) {
+      return;
+    }
+
+    value--;
+    target.value = value;
+  }
+
+  function increment(e) {
+    const btn = e.target.parentNode.parentElement.querySelector(
+      'button[data-action="decrement"]'
+    );
+    const target = btn.nextElementSibling;
+    let value = Number(target.value);
+    value++;
+    target.value = value;
+  }
+
+  function agregarAlCarrito(e) {
+    const btn = e.target.parentNode.parentElement.querySelector(
+      'button[data-action="decrement"]'
+    );
+    const target = btn.nextElementSibling;
+    let value = Number(target.value);
+    if (value === 0) {
+      return;
+    }
+
+    let itemEnCarrito = cart.products.find((item) => item.id == itemId);
+    let newCart = { ...cart };
+
+    if (itemEnCarrito) {
+      itemEnCarrito.quantity = Number(itemEnCarrito.quantity) + Number(value);
+      newCart.products.splice(cart.products.indexOf(itemEnCarrito), 1, itemEnCarrito);
+    } else {
+      newCart.products.push({ ...item, quantity: value });
+    }
+    setCart({ ...newCart });
+  }
 
   const starsRating = [];
   for (let index = 0, rating = Math.floor(item.rating.rate); index < 5; index++) {
@@ -43,21 +92,34 @@ const ItemDetailContainer = ({ products }) => {
             </div>
             <p className="leading-relaxed">{item.description}</p>
             <div className="mt-14 mb-5 flex items-center border-b-2 border-gray-800 pb-5"></div>
-            <div className="flex">
+            <div className="flex flex-col md:flex-row">
               <span className="text-2xl font-medium text-white">${item.price}</span>
-              <button className="ml-auto flex rounded border-0 bg-blue-500 py-2 px-6 text-white hover:bg-blue-600 focus:outline-none">
+              <div className="ml-0 mt-2 flex h-10 w-28 rounded border-0 md:ml-auto md:mt-0">
+                <div className="relative flex h-10 w-full flex-row rounded-lg bg-transparent">
+                  <button
+                    onClick={decrement}
+                    data-action="decrement"
+                    className=" h-full w-1/3 cursor-pointer rounded-l bg-gray-300 text-gray-600 outline-none hover:bg-gray-400 hover:text-gray-700">
+                    <span className="m-auto text-2xl font-thin">−</span>
+                  </button>
+                  <input
+                    type="number"
+                    className="flex w-1/3 items-center bg-gray-300 text-center font-semibold text-gray-700  outline-none hover:text-black focus:text-black  focus:outline-none"
+                    name="item-buy-quantity"
+                    defaultValue={0}
+                  />
+                  <button
+                    onClick={increment}
+                    data-action="increment"
+                    className="h-full w-1/3 cursor-pointer rounded-r bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-700">
+                    <span className="m-auto text-2xl font-thin">+</span>
+                  </button>
+                </div>
+              </div>
+              <button
+                onClick={agregarAlCarrito}
+                className="ml-0 mt-2 flex max-w-xs rounded border-0 bg-blue-500 py-2 px-6 text-white hover:bg-blue-600 focus:outline-none md:mt-0 md:ml-4">
                 Comprar
-              </button>
-              <button className="ml-4 inline-flex h-10 w-10 items-center justify-center rounded-full border-0 bg-gray-800 p-0 text-gray-500">
-                <svg
-                  fill="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24">
-                  <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
-                </svg>
               </button>
             </div>
           </div>
