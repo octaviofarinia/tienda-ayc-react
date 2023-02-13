@@ -4,6 +4,19 @@ import { Dialog, Transition } from '@headlessui/react';
 import { CartContext } from '../../App';
 import { Link } from 'react-router-dom';
 
+export function eliminarItemDeCarrito(cart, itemEnCarrito) {
+  let newCart = { ...cart };
+  if (itemEnCarrito.quantity <= 1) {
+    newCart.products.splice(cart.products.indexOf(itemEnCarrito), 1);
+  } else {
+    newCart.products.splice(cart.products.indexOf(itemEnCarrito), 1, {
+      ...itemEnCarrito,
+      quantity: itemEnCarrito.quantity - 1
+    });
+  }
+  return newCart;
+}
+
 const CartWidget = () => {
   let [cart, setCart] = useContext(CartContext);
   let [isOpen, setIsOpen] = useState(false);
@@ -17,15 +30,7 @@ const CartWidget = () => {
   }
 
   function eliminarDeCarrito(itemEnCarrito) {
-    let newCart = { ...cart };
-    if (itemEnCarrito.quantity <= 1) {
-      newCart.products.splice(cart.products.indexOf(itemEnCarrito), 1);
-    } else {
-      newCart.products.splice(cart.products.indexOf(itemEnCarrito), 1, {
-        ...itemEnCarrito,
-        quantity: itemEnCarrito.quantity - 1
-      });
-    }
+    let newCart = eliminarItemDeCarrito(cart, itemEnCarrito);
     setCart({ ...newCart });
   }
 
@@ -54,7 +59,7 @@ const CartWidget = () => {
             leave="ease-in duration-200"
             leaveFrom="opacity-100"
             leaveTo="opacity-0">
-            <div className="fixed inset-0 bg-black/25" />
+            <div className="fixed inset-0 bg-black/75" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -137,12 +142,13 @@ const CartWidget = () => {
                       Cerrar
                     </button>
                     {cart.products.length !== undefined && cart.products.length !== 0 ? (
-                      <button
+                      <Link
+                        to="/checkout"
+                        onClick={closeModal}
                         type="button"
-                        className="justify-center rounded-md border border-transparent bg-green-200 px-4 py-2 text-sm font-medium text-black hover:bg-green-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2"
-                        onClick={closeModal}>
+                        className="justify-center rounded-md border border-transparent bg-green-200 px-4 py-2 text-sm font-medium text-black hover:bg-green-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2">
                         Confirmar Compra
-                      </button>
+                      </Link>
                     ) : (
                       ''
                     )}

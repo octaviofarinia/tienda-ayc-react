@@ -1,45 +1,27 @@
-import React, { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../../App';
 
 const ItemDetailContainer = ({ products }) => {
+  const [cantItems, setCantItems] = useState(1);
   const { itemId } = useParams();
   const item = products.find((item) => item.id == itemId);
 
   let [cart, setCart] = useContext(CartContext);
 
-  function decrement(e) {
-    const btn = e.target.parentNode.parentElement.querySelector(
-      'button[data-action="decrement"]'
-    );
-    const target = btn.nextElementSibling;
-    let value = Number(target.value);
-
-    if (value === 0) {
+  function decrement() {
+    if (cantItems <= 1) {
       return;
     }
-
-    value--;
-    target.value = value;
+    setCantItems(cantItems - 1);
   }
 
-  function increment(e) {
-    const btn = e.target.parentNode.parentElement.querySelector(
-      'button[data-action="decrement"]'
-    );
-    const target = btn.nextElementSibling;
-    let value = Number(target.value);
-    value++;
-    target.value = value;
+  function increment() {
+    setCantItems(cantItems + 1);
   }
 
   function agregarAlCarrito(e) {
-    const btn = e.target.parentNode.parentElement.querySelector(
-      'button[data-action="decrement"]'
-    );
-    const target = btn.nextElementSibling;
-    let value = Number(target.value);
-    if (value === 0) {
+    if (cantItems === 0) {
       return;
     }
 
@@ -47,10 +29,10 @@ const ItemDetailContainer = ({ products }) => {
     let newCart = { ...cart };
 
     if (itemEnCarrito) {
-      itemEnCarrito.quantity = Number(itemEnCarrito.quantity) + Number(value);
+      itemEnCarrito.quantity = Number(itemEnCarrito.quantity) + Number(cantItems);
       newCart.products.splice(cart.products.indexOf(itemEnCarrito), 1, itemEnCarrito);
     } else {
-      newCart.products.push({ ...item, quantity: value });
+      newCart.products.push({ ...item, quantity: cantItems });
     }
     setCart({ ...newCart });
   }
@@ -106,7 +88,7 @@ const ItemDetailContainer = ({ products }) => {
                     type="number"
                     className="flex w-1/3 items-center bg-gray-300 text-center font-semibold text-gray-700  outline-none hover:text-black focus:text-black  focus:outline-none"
                     name="item-buy-quantity"
-                    defaultValue={0}
+                    value={cantItems}
                   />
                   <button
                     onClick={increment}
