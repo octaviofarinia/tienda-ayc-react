@@ -22,7 +22,6 @@ const CheckoutForm = () => {
       ...cart
     });
     console.log('Document written with ID: ', docRef.id);
-
     setOpenConfirmation(true);
     setNroPedido(docRef.id);
     setCart({ ...cart, products: [] });
@@ -142,6 +141,7 @@ const CheckoutForm = () => {
         <CheckoutConfirmationModal
           open={openConfirmation}
           setOpen={setOpenConfirmation}
+          nroPedido={nroPedido}
         />
       </>
     );
