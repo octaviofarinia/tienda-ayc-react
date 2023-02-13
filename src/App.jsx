@@ -7,6 +7,7 @@ import { db } from '../db/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import CheckoutForm from './components/CheckoutForm/CheckoutForm';
 
 export function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -25,17 +26,18 @@ function App() {
     const docs = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     console.log('se realizo una llamada a firebase para obtener los productos');
     // REQUEST TO JSON-SERVER
-    //const docs = await axios
-    //  .get('http://localhost:3001/api/noticias')
-    //  .then((res) => res.data);
+    // const docs = await axios
+    //   .get('http://localhost:3001/api/noticias')
+    //   .then((res) => res.data);
 
     setProducts(docs);
   };
 
   const getCart = async () => {
-    //const testCart = await axios
-    //  .get('http://localhost:3001/api/noticias/cart')
-    //  .then((res) => res.data);
+    // const testCart = await axios
+    //   .get('http://localhost:3001/api/noticias/cart')
+    //   .then((res) => res.data);
+    // setCart(testCart);
     setCart({
       userID: 1,
       products: [],
@@ -66,6 +68,7 @@ function App() {
             path="/item/:itemId"
             element={<ItemDetailContainer products={products} />}
           />
+          <Route path="/checkout" element={<CheckoutForm />} />
         </Routes>
       </div>
     </CartContext.Provider>
