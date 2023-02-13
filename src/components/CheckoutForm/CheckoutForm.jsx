@@ -121,7 +121,7 @@ const CheckoutForm = () => {
               </div>
               <div className="relative mb-4">
                 <label htmlFor="message" className="text-sm leading-7 text-gray-400">
-                  Message
+                  Aclaraciones
                 </label>
                 <textarea
                   id="message"
